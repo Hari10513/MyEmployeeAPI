@@ -23,6 +23,24 @@ namespace MyEmployeeAPI.Repository
 
             return null;
         }
+        public async Task<Employee> GetId(int EmpId)
+        {
+            try
+            {
+                if (db != null)
+                {
+                    var a = await db.Employee.FromSqlRaw("Execute spGetEmployeeById {0}", EmpId).ToListAsync();
+                    return a.FirstOrDefault();
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<int> Add(Employee Emp)
         {
             if (db != null)

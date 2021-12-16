@@ -10,6 +10,8 @@ namespace MyEmployeeAPI.Repository
     {
         Task<List<Employee>> Get();
 
+        Task<Employee> GetId(int EmpId);
+
         Task<int> Add(Employee Emp);
 
         Task Update(Employee Emp);

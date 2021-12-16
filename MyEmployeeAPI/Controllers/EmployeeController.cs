@@ -39,7 +39,28 @@ namespace MyEmployeeAPI.Controllers
             }
 
         }
-        [HttpPost]
+
+        [HttpGet]
+        [Route("GetId")]
+        public async Task<IActionResult> GetId(int EmpId)
+        {
+            try
+            {
+                var categories = await postRepository.GetId(EmpId);
+                if (categories == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(categories);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+
+        }
+        [HttpDelete]
         [Route("Delete")]
         public async Task<IActionResult> DeletePost(int? EmpId)
         {
@@ -65,8 +86,8 @@ namespace MyEmployeeAPI.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost]
-        [Route("UpdatePost")]
+        [HttpPut]
+        [Route("Post")]
         public async Task<IActionResult> Update([FromBody] Employee model)
         {
             if (ModelState.IsValid)
